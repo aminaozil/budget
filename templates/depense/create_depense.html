@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block content %}
+  {% include "logo.html" %}
+  <form action="/create_dep" method="POST"
+    class="max-w-md mx-auto  m-8 pb-10 pt-10 pr-10 pl-10">
+    <h1 class="mb-5 text-emerald-900 text-center" >AJOUTER DEPENSE</h1>
+    
+    <label for="Titre" class="text-emerald-900 size-16">Titre</label>
+    <div class="mb-5">
+      <input type="text" id="titre_depense" name="titre_depense" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-900 focus:border-emerald-900 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-emerald-900 dark:focus:border-emerald-900"  required />
+    </div>
+    <label for="Montant" class="text-emerald-900 size-16">Montant</label>
+    <div class="mb-5">
+      <input type="number" id="montant_depense" name="montant_depense" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-emerald-900 focus:border-emerald-900 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-emerald-900 dark:focus:border-emerald-900"  required />
+    </div>
+  
+    <button type="submit" class="text-white  bg-emerald-900 hover: bg-emerald-800focus:ring-4 focus:outline-none focus:ring-emerald-500 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-emerald-900 dark:hover:bg-emerald-900 dark:focus:ring-emerald-900 ">Valider</button>
+  </form>
+
+{% endblock content %}

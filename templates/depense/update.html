@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+
+{% block content %}
+{% include "logo.html" %}
+<form action="/update_depense/{{depense.id}}" method="POST"
+  class="max-w-md mx-auto  m-8 pb-10 pt-10 pr-10 pl-10">
+  <h1 class="mb-5 text-emerald-900 text-center" >MODIFIER REVENU</h1>
+  
+  <label for="Titre" class="text-emerald-900 size-16">Titre</label>
+  <div class="mb-5">
+    <input type="text" value="{{ depense.titre_depense }}" id="titre" name="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
+  </div>
+  <label for="Montant" class="text-emerald-900 size-16">Montant</label>
+  <div class="mb-5">
+    <input type="number" value="{{ depense.montant_depense }}" id="montant" name="montant" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
+  </div>
+ 
+  <button type="submit" class="text-white  bg-emerald-900 hover: bg-emerald-800focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Modifier</button>
+</form>
+
+{% endblock content %}

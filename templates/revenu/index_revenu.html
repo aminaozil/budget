@@ -1,0 +1,123 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="pl-11">
+    <h1 class="font text-2xl mb-4 text-[#D1C000]">Liste des revenus</h1>
+
+    
+    
+    <table class="border-collapse border border-slate-300 inline-table w-full">
+        <thead>
+          <tr>
+            
+            <th class="border border-slate-300 px-4 py-2 bg-emerald-900 text-white text-left">TITRE</th>
+            <th class="border border-slate-300 px-4 py-2 bg-emerald-900 text-white text-left">MONTANT</th>
+            <th class="border border-slate-300 px-4 py-2 bg-emerald-900 text-white text-left">ACTION</th>
+            
+           
+          </tr>
+        </thead>
+        {% for revenu in revenus %}
+        <tbody>
+          <tr>
+            <td class="border border-slate-300 px-4 py-2 "><a class="hover:text-[#D1C000]" href="/update_revenu/{{revenu.id}}/">{{revenu.titre_revenu}}</a></td>
+            <td class="border border-slate-300 px-4 py-2"><a class="hover:text-[#D1C000]" href="/update_revenu/{{revenu.id}}/">{{revenu.montant_revenu}}</a></td>
+           
+            <td class="border border-slate-300 px-4 py-2">
+              <a href="/delete_revenu/{{revenu.id}}/" 
+              class="bg-red-500 hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:ring-violet-300 p-2 rounded text-white" onclick="return confirm('Vous voulez vraiment supprimer cette depense')">
+                Supprimer
+              </a>
+             
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %} 
+        <tr>
+          <td class="border border-slate-300 px-4 py-2">
+            <div>
+              <a href="/create_revenu" class="flex flex-wrap text-[#D1C000]">AJOUTER REVENU
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="float-right size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                </svg>
+
+              </a>
+            </div> 
+          </td>
+         </tr>
+      </table>
+      
+      <br>
+      <nav aria-label="Page navigation example">
+        <ul class="flex items-center -space-x-px h-8 text-sm">
+          {% if revenus.has_prev %}
+
+          <li>
+            <a href="/?page={{ revenus.prev_num }}" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-emerald-900 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Previous</span>
+              <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+              </svg>
+            </a>
+          </li>
+          {% else %}
+          <li>
+            <a href="" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-emerald-900 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Previous</span>
+              <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+              </svg>
+            </a>
+          </li>
+          {% endif %}
+           &nbsp;&nbsp;
+          {% for page_num in revenus.iter_pages() %}
+          
+          <!--  Check if the page number exists (not None) -->
+           {% if page_num %} 
+          
+          <!-- Check if the current page is not the active page -->
+           {% if page_num != revenus.page %} 
+          <!-- Create a clickable link for the page number -->
+           <li class="page-item"><a class="page-link text-emerald-900" href="/?page={{ page_num }}">{{ page_num }}</a></li>&nbsp;&nbsp;
+          {% else %}
+          
+          <!-- Highlight the current page as active and not clickable -->
+          <li class="page-item active" aria-current="page">
+              <span class="page-link text-emerald-900">{{ page_num }}</span>
+          </li>
+          {% endif %}
+          {% else %}  
+          
+          <!-- For gaps in the pagination links, show ellipsis -->
+           <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% endif %}
+          {% endfor %}
+          &nbsp;&nbsp;
+          {% if revenus.has_next %}
+
+          <li>
+           
+            <a href="/?page={{ revenus.next_num }}" class="flex items-center justify-center px-3 h-8 leading-tight text-emerald-900 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Next</span>
+              <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+            </a>
+          </li>
+          {% else %} 
+          <li>
+            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-emerald-900 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Next</span>
+              <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+
+     
+
+{% endblock content %}
